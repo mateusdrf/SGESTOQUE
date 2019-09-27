@@ -6,9 +6,12 @@
     <div class="col-lg-12">
         <div class="grid">
             <div class="grid-header">
-                <div style="width: 10%">Funcionários
-                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novofuncionario">
-                        <i class="mdi mdi-account-plus-outline"></i>Novo
+                <div style="width: 10%">Estoque
+                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novasaida">
+                        <i class="mdi mdi-account-plus-outline"></i>Registrar Saída
+                    </div>
+                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novaentrada">
+                        <i class="mdi mdi-account-plus-outline"></i>Registrar Entrada
                     </div>
                 </div>
             </div>
@@ -28,9 +31,7 @@
                                 <td class="text-left">ID</td>
                                 <td class="text-left">Nome Sobrenome</td>
                                 <td class="text-left">Email</td>
-                                <td class="text-left">
-                                    UD
-                                </td>
+                                <td class="text-left">ok</td>
                             </tr>
                         </tbody>
                     </table>

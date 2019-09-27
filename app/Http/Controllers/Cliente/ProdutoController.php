@@ -27,9 +27,9 @@ class ProdutoController extends Controller
         $validatedData = $req->validate([
             'nome'        => ['required', 'string', 'max:255'],
             'precocompra' => ['required', 'string', 'max:255'],
-            'precovenda'  => ['required', 'string', 'email', 'max:255', 'unique:clientes'],
-            'qtdmin'      => ['required', 'string', 'min:6', 'confirmed'],
-            'qtdmax'      => ['required', 'string', 'min:6', 'confirmed'],
+            'precovenda'  => ['required', 'string', 'max:255'],
+            'qtdmin'      => ['required', 'string', 'max:255'],
+            'qtdmax'      => ['required', 'string', 'max:255'],
         ]);
 
         \App\Produto::create([

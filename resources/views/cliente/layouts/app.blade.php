@@ -105,7 +105,7 @@
             </a>
           </li>
 
-          <li>
+          <!-- <li>
             <a href="{{ route('cliente.entradas') }}">
               <span class="link-title">Entradas</span>
               <i class="mdi mdi-trending-up link-icon"></i>
@@ -117,7 +117,7 @@
               <span class="link-title">Saídas</span>
               <i class="mdi mdi-trending-up link-icon"></i>
             </a>
-          </li>
+          </li> -->
 
           <li>
             <a href="{{ route('cliente.estoque') }}">
