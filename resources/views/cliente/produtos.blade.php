@@ -69,7 +69,7 @@
                         <label for="precocompra" class="col-md-4 col-form-label text-md-right">Preço de Compra</label>
 
                         <div class="col-md-6">
-                            <input id="precocompra" type="text" class="form-control @error('precocompra') is-invalid @enderror" name="precocompra" value="{{ old('precocompra') }}" required autocomplete="precocompra" autofocus>
+                            <input id="precocompra" type="text" class="money form-control @error('precocompra') is-invalid @enderror" name="precocompra" value="{{ old('precocompra') }}" required autocomplete="precocompra" autofocus>
 
                             @error('precocompra')
                                 <span class="invalid-feedback" role="alert">
@@ -83,7 +83,7 @@
                         <label for="precovenda" class="col-md-4 col-form-label text-md-right">Preço de Venda</label>
 
                         <div class="col-md-6">
-                            <input id="precovenda" type="text" class="form-control @error('precovenda') is-invalid @enderror" name="precovenda" value="{{ old('precovenda') }}" required autocomplete="precovenda">
+                            <input id="precovenda" type="text" class="money form-control @error('precovenda') is-invalid @enderror" name="precovenda" value="{{ old('precovenda') }}" required autocomplete="precovenda">
 
                             @error('precovenda')
                                 <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
                         <label for="datavencimento" class="col-md-4 col-form-label text-md-right">Data de Validade</label>
 
                         <div class="col-md-6">
-                            <input id="datavencimento" type="text" class="form-control @error('datavencimento') is-invalid @enderror" name="datavencimento" value="{{ old('datavencimento') }}" required autocomplete="datavencimento">
+                            <input id="datavencimento" type="text" class="date form-control @error('datavencimento') is-invalid @enderror" name="datavencimento" value="{{ old('datavencimento') }}" required autocomplete="datavencimento">
 
                             @error('datavencimento')
                                 <span class="invalid-feedback" role="alert">
@@ -111,7 +111,7 @@
                         <label for="qtdmin" class="col-md-4 col-form-label text-md-right">Quantidade Mínima</label>
 
                         <div class="col-md-6">
-                            <input id="qtdmin" type="text" class="form-control @error('qtdmin') is-invalid @enderror" name="qtdmin" value="{{ old('qtdmin') }}" required autocomplete="qtdmin">
+                            <input id="qtdmin" type="number" class="form-control @error('qtdmin') is-invalid @enderror" name="qtdmin" value="{{ old('qtdmin') }}" required autocomplete="qtdmin">
 
                             @error('qtdmin')
                                 <span class="invalid-feedback" role="alert">
@@ -125,7 +125,7 @@
                         <label for="qtdmax" class="col-md-4 col-form-label text-md-right">Quantidade Máxima</label>
 
                         <div class="col-md-6">
-                            <input id="qtdmax" type="text" class="form-control @error('qtdmax') is-invalid @enderror" name="qtdmax" value="{{ old('qtdmax') }}" required autocomplete="qtdmax">
+                            <input id="qtdmax" type="number" class="form-control @error('qtdmax') is-invalid @enderror" name="qtdmax" value="{{ old('qtdmax') }}" required autocomplete="qtdmax">
 
                             @error('qtdmax')
                                 <span class="invalid-feedback" role="alert">

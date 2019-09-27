@@ -184,6 +184,14 @@
     <!-- build:js -->
     <script src="{{ asset('assets/js/dashboard.min.js') }}"></script>
     <script src="{{ asset('assets/js/template.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <!-- endbuild -->
   </body>
+  <script>
+    $(document).ready(function(){
+      $('.date').mask('00/00/0000');
+      $('.money').mask('000.000.000.000.000,00', {reverse: true});
+    });
+  </script>
 </html>

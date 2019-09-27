@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Cliente'], function() {
     Route::post('saida/nova', 'ProdutoController@NovaSaida')->name('cliente.saida.nova');    
     
     //Rota para o estoque
-    Route::get('estoque', 'HomeController@ListarEstoque')->name('cliente.estoque');
+    Route::get('estoque', 'ProdutoController@ListarEstoque')->name('cliente.estoque');
 
     //Rota para os funcionários
     Route::get('funcionarios', 'HomeController@ListarFuncionarios')->name('cliente.funcionarios');
