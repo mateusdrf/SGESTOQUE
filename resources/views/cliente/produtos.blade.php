@@ -1,4 +1,4 @@
-@extends('cliente.modals')
+@extends('cliente.modals.modals')
 @extends('cliente.layouts.app')
 
 @section('content')
@@ -19,17 +19,27 @@
                             <tr>
                                 <th class="text-left">Código</th>
                                 <th class="text-left">Nome</th>
-                                <th class="text-left">Email</th>
-                                <th class="text-left">Opções</th>
+                                <th class="text-left">Preço de Compra</th>
+                                <th class="text-left">Preço de Venda</th>
+                                <th class="text-left">Vencimento</th>
+                                <th class="text-left">Q min</th>
+                                <th class="text-left">Q max</th>
+                                <th class="text-left">Descrição</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-left">ok</td>
-                                <td class="text-left">ok</td>
-                                <td class="text-left">ok</td>
-                                <td class="text-left">ok</td>
-                            </tr>
+                            @foreach ($produtos as $p)
+                                <tr>
+                                    <td class="text-left">{{ $p->id }}</td>
+                                    <td class="text-left">{{ $p->nome }}</td>
+                                    <td class="text-left">{{ $p->precocompra }}</td>
+                                    <td class="text-left">{{ $p->precovenda }}</td>
+                                    <td class="text-left">{{ $p->datavencimento }}</td>
+                                    <td class="text-left">{{ $p->qtdmin }}</td>
+                                    <td class="text-left">{{ $p->qtdmax }}</td>
+                                    <td class="text-left">{{ $p->descricao }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

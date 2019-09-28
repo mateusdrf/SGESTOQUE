@@ -1,4 +1,4 @@
-@extends('cliente.modals')
+@extends('cliente.modals.modals')
 @extends('cliente.layouts.app')
 
 @section('content')

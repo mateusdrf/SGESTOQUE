@@ -15,6 +15,8 @@
     <!-- endinject -->
     <!-- Layout style -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo_1/style.min.css') }}">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <style>
       .t-header .t-header-content-wrapper{
         border-left: 1px solid #f2f4f9;
@@ -186,8 +188,10 @@
     <script src="{{ asset('assets/js/template.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <!-- endbuild -->
   </body>
+  @yield('scripts')
   <script>
     $(document).ready(function(){
       $('.date').mask('00/00/0000');

@@ -14,10 +14,10 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="quantidade" class="col-md-4 col-form-label text-md-right">Quantidade</label>
+                        <label for="quantidadeent" class="col-md-4 col-form-label text-md-right">Quantidade</label>
 
                         <div class="col-md-6">
-                            <input id="quantidade" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
+                            <input id="quantidadeent" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
 
                             @error('quantidade')
                                 <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                         <label for="motivo" class="col-md-4 col-form-label text-md-right">Motivo</label>
 
                         <div class="col-md-6">
-                            <input id="motivo" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
+                            <input id="motivoent" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
 
                             @error('motivo')
                                 <span class="invalid-feedback" role="alert">
@@ -161,7 +161,7 @@
                         <label for="quantidade" class="col-md-4 col-form-label text-md-right">Quantidade</label>
 
                         <div class="col-md-6">
-                            <input id="quantidade" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
+                            <input id="quantidadesai" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
 
                             @error('quantidade')
                                 <span class="invalid-feedback" role="alert">
@@ -175,7 +175,7 @@
                         <label for="motivo" class="col-md-4 col-form-label text-md-right">Motivo</label>
 
                         <div class="col-md-6">
-                            <input id="motivo" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
+                            <input id="motivosai" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
 
                             @error('motivo')
                                 <span class="invalid-feedback" role="alert">

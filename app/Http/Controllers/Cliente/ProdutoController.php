@@ -15,7 +15,9 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarProdutos() {
-        return view('cliente.produtos');
+        $produtos = \App\Produto::where('cliente_id', Auth::id())->get();
+
+        return view('cliente.produtos')->with('produtos', $produtos);
     }
 
     /**
@@ -126,7 +128,8 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarEstoque() {
-        //retornar produtos com a quantidade de entradas menos a quantidade de saidas
-        return view('cliente.estoque');
+        $produtos = \App\Produto::where('cliente_id', Auth::id())->get();
+        
+        return view('cliente.estoque')->with('produtos', $produtos);
     }
 }
