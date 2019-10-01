@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/demo_1/style.min.css') }}">
     <!-- Datatables -->
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
     <style>
       .t-header .t-header-content-wrapper{
         border-left: 1px solid #f2f4f9;
@@ -189,6 +192,7 @@
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- endbuild -->
   </body>
   @yield('scripts')
