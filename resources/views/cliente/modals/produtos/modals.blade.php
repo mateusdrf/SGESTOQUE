@@ -125,7 +125,7 @@
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-- Modal de editar produto -->
-<div class="modal" id="editaproduto" tabindex="-1" role="dialog">
+<div class="modal" id="editarproduto" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,9 +135,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('cliente.produtos.novo') }}">
+                <form method="POST" action="{{ route('cliente.produtos.editar') }}">
                     @csrf
-
+                    <input type="hidden" name="id" id="eid">
                     <div class="form-group row">
                         <label for="enome" class="col-md-4 col-form-label text-md-right">Nome</label>
 
@@ -246,3 +246,28 @@
     </div>
 </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Modal de editar produto -->
+<div class="modal" id="deletarproduto" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deletar Produto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('cliente.produtos.deletar') }}">
+                    @csrf
+                    <input type="hidden" name="id" id="did">
+                    <p>Deseja deletar este item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Deletar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarProdutos() {
-        $produtos = \App\Produto::where('cliente_id', Auth::id())->get();
+        $produtos = \App\Produto::where('cliente_id', Auth::id())->where('isactive', '!=', 1)->get();
 
         return view('cliente.produtos')->with('produtos', $produtos);
     }
@@ -44,8 +44,51 @@ class ProdutoController extends Controller
             'qtdmax'         => $req['qtdmax'],
             'descricao'      => $req['descricao'],
         ]);
-        return view('cliente.produtos');
+        return $this->ListarProdutos();
     }
+
+    /**
+     * Edita Produtos
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function EditarProduto(Request $req) {
+        $validatedData = $req->validate([
+            'nome'        => ['required', 'string', 'max:255'],
+            'precocompra' => ['required', 'string', 'max:255'],
+            'precovenda'  => ['required', 'string', 'max:255'],
+            'qtdmin'      => ['required', 'string', 'max:255'],
+            'qtdmax'      => ['required', 'string', 'max:255'],
+        ]);
+
+        $produto = \App\Produto::Find($req['id']);
+        $produto->cliente_id     = Auth::id();
+        $produto->nome           = $req['nome'];
+        $produto->precocompra    = $req['precocompra'];
+        $produto->precovenda     = $req['precovenda'];
+        $produto->datavencimento = $req['datavencimento'];
+        $produto->qtdmin         = $req['qtdmin'];
+        $produto->qtdmax         = $req['qtdmax'];
+        $produto->descricao      = $req['descricao'];
+
+        $produto->save();
+
+        return $this->ListarProdutos();
+    }
+
+    /**
+     * Edita Produtos
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function DeletarProduto(Request $req) {
+        $produto = \App\Produto::Find($req['id']);
+        $produto->isactive = 1;
+        $produto->save();
+
+        return $this->ListarProdutos();
+    }
+
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     /*-------------------------------------------------------------------Entradas-------------------------------------------------------------------*/

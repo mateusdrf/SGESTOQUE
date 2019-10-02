@@ -13,6 +13,6 @@ class Produto extends Model
      * @var array
      */
     protected $fillable = [
-        'cliente_id', 'nome', 'precocompra', 'precovenda', 'datavencimento', 'qtdmin', 'qtdmax', 'descricao'
+        'cliente_id', 'nome', 'precocompra', 'precovenda', 'datavencimento', 'qtdmin', 'qtdmax', 'descricao', 'isactive'
     ];
 }

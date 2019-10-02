@@ -27,6 +27,8 @@ Route::group(['namespace' => 'Cliente'], function() {
     //Rotas para os produtos
     Route::get('produtos', 'ProdutoController@ListarProdutos')->name('cliente.produtos');
     Route::post('produto/novo', 'ProdutoController@NovoProduto')->name('cliente.produtos.novo');
+    Route::post('produto/editar', 'ProdutoController@EditarProduto')->name('cliente.produtos.editar');
+    Route::post('produto/deletar', 'ProdutoController@DeletarProduto')->name('cliente.produtos.deletar');
     
     //Rota para as entradas
     Route::get('entradas', 'ProdutoController@ListarEntradas')->name('cliente.entradas');

@@ -61,6 +61,7 @@
             var produtos = JSON.parse($("#produtos").val());
             var ps = produtos[produtos.findIndex(obj => obj.id==id)]; //ps = produto selecionado
         
+            $("#eid").val(ps.id);
             $("#enome").val(ps.nome);
             $("#eprecocompra").val(ps.precocompra);
             $("#eprecovenda").val(ps.precovenda);
@@ -69,12 +70,13 @@
             $("#eqtdmax").val(ps.qtdmax);
             $("#edescricao").val(ps.descricao);
             
-            $("#editaproduto").modal('show');
+            $("#editarproduto").modal('show');
         }
 
         function excluir(element){
             var id = $(element).data('id');
-            console.log(id);
+            $("#did").val(id);
+            $("#deletarproduto").modal('show');
         }
     </script>
 @endsection
