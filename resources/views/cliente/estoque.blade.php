@@ -3,18 +3,15 @@
 
 @section('content')
 <input type="hidden" value="{{$produtos}}">
-<div class="row">
-    <div class="col-lg-12">
+<div class="container-fluid">
+    <!--div class="col-lg-12"-->
         <div class="grid">
             <div class="grid-header">
-                <div style="width: 10%">Estoque
-                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novasaida">
-                        <i class="mdi mdi-account-plus-outline"></i>Registrar Saída
-                    </div>
-                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novaentrada">
-                        <i class="mdi mdi-account-plus-outline"></i>Registrar Entrada
-                    </div>
-                </div>
+                <!--div style="width: 10%"-->
+                    <h2>Estoque</h2>
+                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#novaentrada"><i class="mdi mdi-plus"></i>Registrar Entrada</button>
+                        <button class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#novasaida"><i class="mdi mdi-minus"></i>Registrar Saída</button>
+                <!--/div-->
             </div>
             <div class="item-wrapper">
                 <div class="table-responsive">
@@ -38,8 +35,8 @@
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">
-                                        <button class="btn btn-danger" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="deletar(this)"></button>
-                                        <button class="btn btn-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="editar(this)"></button>
+                                        <button class="btn btn-outline-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="editar(this)"><i class="mdi mdi-circle-edit-outline"></i>Editar</button>
+                                        <button class="btn btn-outline-danger" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="deletar(this)"><i class="mdi mdi-delete"></i>Excluir</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -48,7 +45,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!--/div-->
 </div>
 @endsection
 @section('scripts')
