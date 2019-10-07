@@ -1,4 +1,4 @@
-@extends('cliente.modals.modals')
+@extends('cliente.modals.estoque.modals')
 @extends('cliente.layouts.app')
 
 @section('content')
@@ -6,16 +6,6 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="grid">
-            <div class="grid-header">
-                <div style="width: 10%">Estoque
-                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novasaida">
-                        <i class="mdi mdi-account-plus-outline"></i>Registrar Saída
-                    </div>
-                    <div class="btn btn-success has-icon" data-toggle="modal" data-target="#novaentrada">
-                        <i class="mdi mdi-account-plus-outline"></i>Registrar Entrada
-                    </div>
-                </div>
-            </div>
             <div class="item-wrapper">
                 <div class="table-responsive">
                     <table id="table" class="table info-table">
@@ -38,8 +28,8 @@
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">
-                                        <button class="btn btn-danger" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="deletar(this)"></button>
-                                        <button class="btn btn-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="editar(this)"></button>
+                                        <button class="btn btn-success" data-clienteid="{{ $p->cliente_id }}" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="entrada(this)">Entrada</button>
+                                        <button class="btn btn-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="saida(this)">Saida</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,14 +43,28 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function(){
-            $("#table").DataTable();
-        });
-
-        function deletar(element){
+        // $(document).ready(function(){
+        //     $("#table").DataTable();
+        // });
+        
+        function entrada(element){
             var id = $(element).data('id');
+            var cliid = $(element).data('clienteid');
 
+            $("#idprodentrada").val(id);
+            $("#idclientrada").val(cliid);
+            
+            $("#novaentrada").modal('show');
         }
 
+        function saida(element){
+            var id = $(element).data('id');
+            var cliid = $(element).data('clienteid');
+
+            $("#idprodsaida").val(id);
+            $("#idclisaida").val(cliid);
+
+            $("#novasaida").modal('show');
+        }
     </script>
 @endsection

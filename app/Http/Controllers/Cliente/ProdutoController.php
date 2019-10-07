@@ -102,7 +102,7 @@ class ProdutoController extends Controller
     public function ListarEntradas() {
 
         //Mandar o id do produto para vincular dps
-        return view('cliente.entradas');
+        return $this->ListarEstoque();
     }
 
     /**
@@ -113,17 +113,17 @@ class ProdutoController extends Controller
     public function NovaEntrada(Request $req) {
         $validatedData = $req->validate([
             'motivo'     => ['required', 'string', 'max:500'],
-            'quantidade' => ['required', 'number'],
+            'quantidade' => ['required'],
         ]);
 
         \App\Entrada::create([
-            'cliente_id'     => Auth::id(),
-            'produto_id'     => $req['produto_id'],
+            'cliente_id'     => Auth::user()->id,
+            'produto_id'     => $req['idprod'],
             'motivo'         => $req['motivo'],
             'quantidade'     => $req['quantidade'],
         ]);
 
-        return view('cliente.entradas');
+        return $this->ListarEstoque();
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -136,7 +136,7 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarSaidas() {
-        return view('cliente.saidas');
+        return $this->ListarEstoque();
     }
 
     /**
@@ -157,7 +157,7 @@ class ProdutoController extends Controller
             'quantidade'     => $req['quantidade'],
         ]);
 
-        return view('cliente.saidas');
+        return $this->ListarEstoque();
     }
 
     
@@ -171,8 +171,8 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarEstoque() {
-        $produtos = \App\Produto::where('cliente_id', Auth::id())->get();
-        
+        $produtos = \App\Produto::where('cliente_id', Auth::id())->where('isactive', '!=', 1)->get();
+
         return view('cliente.estoque')->with('produtos', $produtos);
     }
 }
