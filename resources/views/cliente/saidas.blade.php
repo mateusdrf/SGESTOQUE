@@ -28,9 +28,7 @@
                                 <td class="text-left">ID</td>
                                 <td class="text-left">Nome Sobrenome</td>
                                 <td class="text-left">Email</td>
-                                <td class="text-left">
-                                    UD
-                                </td>
+                                <td class="text-left">UD</td>
                             </tr>
                         </tbody>
                     </table>
