@@ -43,5 +43,5 @@ Route::group(['namespace' => 'Cliente'], function() {
 
     //Rota para os funcionários
     Route::get('funcionarios', 'HomeController@ListarFuncionarios')->name('cliente.funcionarios');
-    Route::post('funcionario/novo', 'HomeController@NovoFuncionario')->name('cliente.funcionario.novo');
+    Route::post('funcionario/novo', 'HomeController@NovoFuncionario')->name('cliente.inserir.funcionario');
 });

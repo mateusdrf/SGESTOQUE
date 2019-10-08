@@ -19,10 +19,11 @@
                             <tr>
                                 <th class="text-left">Código</th>
                                 <th class="text-left">Nome</th>
-                                <th class="text-left">Q min</th>
-                                <th class="text-left">Q max</th>
-                                <th class="text-left">Atual</th>
-                                <th class="text-left">Opções</th>
+                                <th class="text-left">Preço de Compra</th>
+                                <th class="text-left">Preço de Venda</th>
+                                <th class="text-left">Vencimento</th>
+                                <th class="text-left">Descrição</th>
+                                <th class="text-left">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,9 +31,10 @@
                                 <tr>
                                     <td class="text-left">{{ $p->id }}</td>
                                     <td class="text-left">{{ $p->nome }}</td>
-                                    <td class="text-left">{{ $p->qtdmin }}</td>
-                                    <td class="text-left">{{ $p->qtdmax }}</td>
-                                    <td class="text-left">{{ $p->qtdmax }}</td>
+                                    <td class="text-left">{{ $p->precocompra }}</td>
+                                    <td class="text-left">{{ $p->precovenda }}</td>
+                                    <td class="text-left">{{ $p->datavencimento }}</td>
+                                    <td class="text-left">{{ $p->descricao }}</td>
                                     <td class="text-left">
                                         <button class="btn btn-outline-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="editar(this)"><i class="mdi mdi-circle-edit-outline"></i>Editar</button>
                                         <button class="btn btn-outline-danger" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="deletar(this)"><i class="mdi mdi-delete"></i>Excluir</button>
@@ -49,9 +51,9 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function(){
-            $("#table").DataTable();
-        });
+        // $(document).ready(function(){
+        //     $("#table").DataTable();
+        // });
 
         function editar(element){
             var id = $(element).data('id');
@@ -70,9 +72,13 @@
             $("#editarproduto").modal('show');
         }
 
-        function excluir(element){
+        function deletar(element){
             var id = $(element).data('id');
+            var produtos = JSON.parse($("#produtos").val());
+            var ps = produtos[produtos.findIndex(obj => obj.id==id)];
+
             $("#did").val(id);
+            $("#msgConfirm").html(`Deseja deletar o item <strong>` + ps.nome + `</strong>`);
             $("#deletarproduto").modal('show');
         }
     </script>

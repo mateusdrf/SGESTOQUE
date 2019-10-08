@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\GenericUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,8 +43,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarFuncionarios() {
-        $funcionarios = \App\Cliente::where('isadmin', false)->get();
-        return view('cliente.funcionarios');
+        $funcionarios = \App\Cliente::where('isadmin', 0)->get();
+        return view('cliente.funcionarios')->with('funcionarios', $funcionarios);
     }
 
     /**
@@ -59,15 +60,18 @@ class HomeController extends Controller
             'password'  => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        \App\Cliente::create([
-            'firstname' => $req['firstname'],
-            'lastname'  => $req['lastname'],
-            'email'     => $req['email'],
-            'isadmin'   => false,
-            'isvalid'   => true,
-            'password'  => Hash::make($req['password']),
+        $user = Auth::user();
+
+        App\Cliente::create([
+            'firstname'  => $req['firstname'],
+            'lastname'   => $req['lastname'],
+            'email'      => $req['email'],
+            'cliente_id' => \Auth::id(),
+            'isadmin'    => false,
+            'isvalid'    => true,
+            'password'   => Hash::make($req['password']),
         ]);
-        return view('cliente.funcionarios');
+        return back()->withInput();
     }
 
 

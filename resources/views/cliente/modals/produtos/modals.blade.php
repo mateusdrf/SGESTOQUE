@@ -238,8 +238,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-check"></i>Confirmar</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="mdi mdi-close"></i>Cancelar</button>
                 </div>
             </form>
         </div>
@@ -261,11 +261,11 @@
                 <form method="POST" action="{{ route('cliente.produtos.deletar') }}">
                     @csrf
                     <input type="hidden" name="id" id="did">
-                    <p>Deseja deletar este item?</p>
+                    <p id="msgConfirm">Deseja deletar este item?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Deletar</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-check"></i>Confirmar</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="mdi mdi-close"></i>Cancelar</button>
                 </div>
             </form>
         </div>

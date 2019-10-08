@@ -9,8 +9,6 @@
             <div class="grid-header">
                 <!--div style="width: 10%"-->
                     <h2>Estoque</h2>
-                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#novaentrada"><i class="mdi mdi-plus"></i>Registrar Entrada</button>
-                        <button class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#novasaida"><i class="mdi mdi-minus"></i>Registrar Saída</button>
                 <!--/div-->
             </div>
             <div class="item-wrapper">
@@ -35,8 +33,8 @@
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">{{ $p->qtdmax }}</td>
                                     <td class="text-left">
-                                        <button class="btn btn-outline-warning" data-id="{{$p->id}}" id="edit-{{$p->id}}" onclick="editar(this)"><i class="mdi mdi-circle-edit-outline"></i>Editar</button>
-                                        <button class="btn btn-outline-danger" data-id="{{$p->id}}" id="delete-{{$p->id}}" onclick="deletar(this)"><i class="mdi mdi-delete"></i>Excluir</button>
+                                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#novaentrada"><i class="mdi mdi-plus"></i>Entrada</button>
+                                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#novasaida"><i class="mdi mdi-minus"></i>Saída</button>
                                     </td>
                                 </tr>
                             @endforeach

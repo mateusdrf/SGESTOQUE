@@ -45,33 +45,14 @@
           </form> -->
           <ul class="nav ml-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-settings mdi-1x"></i>
-              </a>
-              <div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="notificationDropdown">
-                <div class="dropdown-header">
-                  <h6 class="dropdown-title">Configurações</h6>
-                  <p class="dropdown-title-text"></p>
-                </div>
-                <div class="dropdown-body">
-                  <div class="dropdown-list">
-                    <div class="icon-wrapper rounded-circle bg-inverse-primary text-primary">
-                      <i class="mdi mdi-logout"></i>
-                    </div>
-                    <div class="content-wrapper">
-                      <a href="{{ route('cliente.logout') }}"
-                          onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                          <small class="name">Sair</small>
-                      </a>
-
-                      <form id="logout-form" action="{{ route('cliente.logout') }}" method="POST" style="display: none;">
-                          @csrf
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <strong style="cursor: pointer;"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <small class="name">Sair</small>
+              </strong>
+              <form id="logout-form" action="{{ route('cliente.logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>         
             </li>
           </ul>
         </div>

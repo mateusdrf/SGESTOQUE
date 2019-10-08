@@ -29,7 +29,6 @@
     </style>
   </head>
   <body class="header-fixed">
-    <!-- partial:../../partials/_header.html -->
     <nav class="t-header">
       <div class="t-header-brand-wrapper" style="padding-left: 75px;!important">
         <a href="#">
@@ -41,57 +40,28 @@
           <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
             <i class="mdi mdi-menu"></i>
           </button>
-          
-          <!-- <form action="#" class="t-header-search-box">
-            <div class="input-group">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
-              <button class="btn btn-primary" type="submit"><i class="mdi mdi-arrow-right-thick"></i></button>
-            </div>
-          </form> -->
           <ul class="nav ml-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-settings mdi-1x"></i>
-              </a>
-              <div class="dropdown-menu navbar-dropdown dropdown-menu-right" aria-labelledby="notificationDropdown">
-                <div class="dropdown-header">
-                  <h6 class="dropdown-title">Configurações</h6>
-                  <p class="dropdown-title-text"></p>
-                </div>
-                <div class="dropdown-body">
-                  <div class="dropdown-list">
-                    <div class="icon-wrapper rounded-circle bg-inverse-primary text-primary">
-                      <i class="mdi mdi-logout"></i>
-                    </div>
-                    <div class="content-wrapper">
-                      <a href="{{ route('cliente.logout') }}"
-                          onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                          <small class="name">Sair</small>
-                      </a>
-
-                      <form id="logout-form" action="{{ route('cliente.logout') }}" method="POST" style="display: none;">
-                          @csrf
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <strong style="cursor: pointer;"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <small class="name">Sair</small>
+              </strong>
+              <form id="logout-form" action="{{ route('cliente.logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>         
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <!-- partial -->
     <div class="page-body">
-      <!-- partial:../../partials/_sidebar.html -->
       <div class="sidebar">
         <div class="user-profile">
           <div class="display-avatar animated-avatar">
             <img class="profile-img img-lg rounded-circle" src="{{ asset('assets/images/profile/male/image_1.png') }}" alt="profile image">
           </div>
           <div class="info-wrapper">
-            <!-- <p class="user-name"></p> -->
           </div>
         </div>
         <ul class="navigation-menu">
@@ -130,23 +100,11 @@
               <i class="mdi mdi-trending-up link-icon"></i>
             </a>
           </li>
-
-          <!-- <li>
-            <a href="{{ route('admin.clientes.list') }}">
-              <span class="link-title">Clientes</span>
-              <i class="mdi mdi-account-multiple link-icon"></i>
-            </a>
-          </li> -->
           <li>
-            <a href="#" data-toggle="collapse" aria-expanded="false">
-              <span class="link-title">Usuários</span>
+            <a href="{{ route('cliente.funcionarios') }}">
+              <span class="link-title">Funcionários</span>
               <i class="mdi mdi-account-multiple link-icon"></i>
             </a>
-            <ul class="collapse navigation-submenu" id="sample-pages">
-              <li>
-                <a href="{{ route('cliente.funcionarios') }}" target="_self">Funcionários</a>
-              </li>
-            </ul>
           </li>
         </ul>
       </div>

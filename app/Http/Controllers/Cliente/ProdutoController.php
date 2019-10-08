@@ -44,7 +44,7 @@ class ProdutoController extends Controller
             'qtdmax'         => $req['qtdmax'],
             'descricao'      => $req['descricao'],
         ]);
-        return $this->ListarProdutos();
+        return back()->withInput();
     }
 
     /**
@@ -73,7 +73,7 @@ class ProdutoController extends Controller
 
         $produto->save();
 
-        return $this->ListarProdutos();
+        return back()->withInput();
     }
 
     /**
@@ -86,24 +86,13 @@ class ProdutoController extends Controller
         $produto->isactive = 1;
         $produto->save();
 
-        return $this->ListarProdutos();
+        return back()->withInput();
     }
 
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     /*-------------------------------------------------------------------Entradas-------------------------------------------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    /**
-     * Show Entradas
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function ListarEntradas() {
-
-        //Mandar o id do produto para vincular dps
-        return $this->ListarEstoque();
-    }
 
     /**
      * Cria Entradas
@@ -123,21 +112,12 @@ class ProdutoController extends Controller
             'quantidade'     => $req['quantidade'],
         ]);
 
-        return $this->ListarEstoque();
+        return back()->withInput();
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------------------------*/
     /*-------------------------------------------------------------------Saídas-------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    /**
-     * Show Saidas
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function ListarSaidas() {
-        return $this->ListarEstoque();
-    }
 
     /**
      * Cria Saidas
@@ -157,7 +137,7 @@ class ProdutoController extends Controller
             'quantidade'     => $req['quantidade'],
         ]);
 
-        return $this->ListarEstoque();
+        return back()->withInput();
     }
 
     
@@ -172,6 +152,10 @@ class ProdutoController extends Controller
      */
     public function ListarEstoque() {
         $produtos = \App\Produto::where('cliente_id', Auth::id())->where('isactive', '!=', 1)->get();
+
+        // foreach($produtos as $p){
+            
+        // }
 
         return view('cliente.estoque')->with('produtos', $produtos);
     }
