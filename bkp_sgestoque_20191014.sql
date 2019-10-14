@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27-Set-2019 às 01:59
+-- Tempo de geração: 14-Out-2019 às 05:07
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -44,11 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `isvalid`, `updated_at`, `created_at`) VALUES
-(5, 'Mateus', 'Ferreira', 'mreisf.geral@gmail.com', '$2y$10$IkF8wjiBXOR23y2FJ9agGO/LJNQgrH3gJyiTXpawA8RunrwVpetfK', 0, '2019-09-25 06:28:35', '2019-09-25 06:28:35'),
-(6, 'Jose', 'Henrique', 'jh@g.com', '$2y$10$FSV0d5Mn5ag5lN8LBGofp.2IyCyQt2Sij3PenTTiXdd53s8xwtuJG', 1, '2019-09-25 06:29:39', '2019-09-25 06:29:39'),
-(7, 'Mateus', 'Admin', 'ma@g.com', '$2y$10$F/v8qEy/6ISrHee/Hybtd.WjMLqHdbzUpUdpXdK4ASPUHtFhvUCwq', 1, '2019-09-25 06:31:46', '2019-09-25 06:31:46'),
-(8, 'Marc', 'Zuck', 'mz@g.com', '$2y$10$10eRYUSsw38NBZlgHCdUX.goj8w20bEsV4if6ozHWKLTXgmo1kjTW', 1, '2019-09-25 06:33:32', '2019-09-25 06:33:32'),
-(9, 'Marc', 'Zuck', 'mz@g.com.br', '$2y$10$L98U1GrwKLKLymwMLEAA6ecSwdYCiPpj4zY4oJR41rgVxxYCSrMWy', 1, '2019-09-25 06:34:13', '2019-09-25 06:34:13');
+(5, 'Mateus', 'Ferreira', 'mreisf.geral@gmail.com', '$2y$10$IkF8wjiBXOR23y2FJ9agGO/LJNQgrH3gJyiTXpawA8RunrwVpetfK', 0, '2019-09-25 06:28:35', '2019-09-25 06:28:35');
 
 -- --------------------------------------------------------
 
@@ -73,6 +69,7 @@ CREATE TABLE `clientes` (
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
   `email` varchar(500) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
   `password` varchar(500) DEFAULT NULL,
   `isadmin` int(11) DEFAULT NULL,
   `isvalid` int(11) DEFAULT NULL,
@@ -84,8 +81,9 @@ CREATE TABLE `clientes` (
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `firstname`, `lastname`, `email`, `password`, `isadmin`, `isvalid`, `updated_at`, `created_at`) VALUES
-(1, 'Mateus', 'Ferreira', 'm@g.com', '$2y$10$JFxgaov/j0/cOCE94OeHYeg8rTlMgpRZIRFf6YDYbcBQX4g0lT4TK', 1, 1, '2019-09-25 05:48:36', '2019-09-25 05:48:36');
+INSERT INTO `clientes` (`id`, `firstname`, `lastname`, `email`, `cliente_id`, `password`, `isadmin`, `isvalid`, `updated_at`, `created_at`) VALUES
+(24, 'Mateus', 'Reis', 'm@g.com', 24, '$2y$10$joiUYIRNESTI3fUG/C5M3.SOhG6bzThz7yLWoixiHu7ClOMGWc3uC', 1, 1, '2019-10-09 04:29:02', '2019-10-09 04:29:02'),
+(25, 'Jose', 'Henrique', 'jh@g.com', 24, '$2y$10$0nFrC9989dz1BJVDgspMQOkZQ0EDeRAz6l2/uqlQqMkZC52E4rdHm', 0, 1, '2019-10-09 04:34:16', '2019-10-09 04:34:16');
 
 -- --------------------------------------------------------
 
@@ -175,15 +173,26 @@ CREATE TABLE `produtos` (
   `id` int(11) NOT NULL,
   `cliente_id` int(11) DEFAULT NULL,
   `nome` varchar(50) DEFAULT NULL,
-  `precocompra` decimal(10,4) DEFAULT NULL,
-  `precovenda` decimal(10,4) DEFAULT NULL,
-  `datavencimento` date DEFAULT NULL,
-  `qtdmin` decimal(10,4) DEFAULT NULL,
-  `qtdmax` decimal(10,4) DEFAULT NULL,
-  `descricao` varchar(50) DEFAULT NULL,
+  `precocompra` varchar(100) DEFAULT NULL,
+  `precovenda` varchar(100) DEFAULT NULL,
+  `datavencimento` varchar(15) DEFAULT NULL,
+  `qtdmin` int(11) DEFAULT NULL,
+  `qtdmax` int(11) DEFAULT NULL,
+  `qtdatual` int(11) DEFAULT NULL,
+  `descricao` varchar(500) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `isactive` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `cliente_id`, `nome`, `precocompra`, `precovenda`, `datavencimento`, `qtdmin`, `qtdmax`, `qtdatual`, `descricao`, `updated_at`, `created_at`, `isactive`) VALUES
+(10, 24, 'Vectra Tubarão', '22.000,00', '25.000,00', '15/04/2050', 10, 25, NULL, 'Carro de macho', '2019-10-14 04:52:35', '2019-10-09 04:39:36', 0),
+(11, 24, 'Gol', '10.000,00', '15.000,00', '16/05/2022', 115, 120, NULL, 'Branco', '2019-10-14 04:53:03', '2019-10-13 20:06:58', 1),
+(12, 24, 'Gol', '10.000,00', '12.000,00', '15/04/2021', 12, 100, NULL, 'Todos pretos', '2019-10-14 04:53:34', '2019-10-14 04:53:34', 0);
 
 -- --------------------------------------------------------
 
@@ -249,6 +258,12 @@ ALTER TABLE `cliente_password_resets`
   ADD KEY `cliente_password_resets_email_index` (`email`);
 
 --
+-- Índices para tabela `entradas`
+--
+ALTER TABLE `entradas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -265,6 +280,18 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Índices para tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Índices para tabela `saidas`
+--
+ALTER TABLE `saidas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `users`
@@ -287,7 +314,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de tabela `entradas`
+--
+ALTER TABLE `entradas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `failed_jobs`
@@ -300,6 +333,18 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `saidas`
+--
+ALTER TABLE `saidas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `users`
