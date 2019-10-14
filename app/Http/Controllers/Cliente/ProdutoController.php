@@ -15,7 +15,9 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarProdutos() {
-        $produtos = \App\Produto::where('cliente_id', Auth::id())->where('isactive', '!=', 1)->get();
+        $user = Auth::guard('cliente')->user()->id;
+        $cliente = \App\Cliente::Find($user);
+        $produtos = \App\Produto::where('cliente_id', $cliente->cliente_id)->where('isactive', '<>', 1)->get();
 
         return view('cliente.produtos')->with('produtos', $produtos);
     }
@@ -35,7 +37,7 @@ class ProdutoController extends Controller
         ]);
 
         \App\Produto::create([
-            'cliente_id'     => Auth::id(),
+            'cliente_id'     => Auth::guard('cliente')->user()->id,
             'nome'           => $req['nome'],
             'precocompra'    => $req['precocompra'],
             'precovenda'     => $req['precovenda'],
@@ -62,7 +64,6 @@ class ProdutoController extends Controller
         ]);
 
         $produto = \App\Produto::Find($req['id']);
-        $produto->cliente_id     = Auth::id();
         $produto->nome           = $req['nome'];
         $produto->precocompra    = $req['precocompra'];
         $produto->precovenda     = $req['precovenda'];
@@ -101,15 +102,15 @@ class ProdutoController extends Controller
      */
     public function NovaEntrada(Request $req) {
         $validatedData = $req->validate([
-            'motivo'     => ['required', 'string', 'max:500'],
-            'quantidade' => ['required'],
+            'motivoent'     => ['required', 'string', 'max:500'],
+            'quantidadeent' => ['required'],
         ]);
 
         \App\Entrada::create([
-            'cliente_id'     => Auth::user()->id,
-            'produto_id'     => $req['idprod'],
-            'motivo'         => $req['motivo'],
-            'quantidade'     => $req['quantidade'],
+            'cliente_id'     => Auth::guard('cliente')->user()->id,
+            'produto_id'     => $req['idprodent'],
+            'motivo'         => $req['motivoent'],
+            'quantidade'     => $req['quantidadeent'],
         ]);
 
         return back()->withInput();
@@ -126,15 +127,15 @@ class ProdutoController extends Controller
      */
     public function NovaSaida(Request $req) {
         $validatedData = $req->validate([
-            'motivo'     => ['required', 'string', 'max:500'],
-            'quantidade' => ['required', 'number'],
+            'motivosai'     => ['required', 'string', 'max:500'],
+            'quantidadesai' => ['required'],
         ]);
 
-        \App\Entrada::create([
-            'cliente_id'     => Auth::id(),
-            'produto_id'     => $req['produto_id'],
-            'motivo'         => $req['motivo'],
-            'quantidade'     => $req['quantidade'],
+        \App\Saida::create([
+            'cliente_id'     => Auth::guard('cliente')->user()->id,
+            'produto_id'     => $req['idprodsai'],
+            'motivo'         => $req['motivosai'],
+            'quantidade'     => $req['quantidadesai'],
         ]);
 
         return back()->withInput();
@@ -151,11 +152,19 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarEstoque() {
-        $produtos = \App\Produto::where('cliente_id', Auth::id())->where('isactive', '!=', 1)->get();
+        $user     = Auth::guard('cliente')->user()->id;
+        $cliente  = \App\Cliente::Find($user);
+        $produtos = \App\Produto::where('cliente_id', $cliente->cliente_id)->where('isactive', '<>', 1)->get();
 
-        // foreach($produtos as $p){
-            
-        // }
+        foreach($produtos as $p){
+            $entradas = \App\Entrada::where('produto_id', $p->id)->get();
+            $saidas   = \App\Saida::where('produto_id', $p->id)->get();
+
+            $entradas = collect($entradas)->sum('quantidade');
+            $saidas   = collect($saidas)->sum('quantidade');
+
+            $p->qtdatual = $entradas - $saidas;
+        }
 
         return view('cliente.estoque')->with('produtos', $produtos);
     }

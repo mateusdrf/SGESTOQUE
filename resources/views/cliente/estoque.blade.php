@@ -16,25 +16,23 @@
                     <table id="table" class="table info-table">
                         <thead>
                             <tr>
-                                <th class="text-left">Código</th>
-                                <th class="text-left">Nome</th>
+                                <th class="text-left">Produto</th>
                                 <th class="text-left">Q min</th>
                                 <th class="text-left">Q max</th>
-                                <th class="text-left">Atual</th>
+                                <th class="text-left">Q atual</th>
                                 <th class="text-left">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($produtos as $p)
                                 <tr>
-                                    <td class="text-left">{{ $p->id }}</td>
                                     <td class="text-left">{{ $p->nome }}</td>
                                     <td class="text-left">{{ $p->qtdmin }}</td>
                                     <td class="text-left">{{ $p->qtdmax }}</td>
-                                    <td class="text-left">{{ $p->qtdmax }}</td>
+                                    <td class="text-left">{{ $p->qtdatual }}</td>
                                     <td class="text-left">
-                                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#novaentrada"><i class="mdi mdi-plus"></i>Entrada</button>
-                                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#novasaida"><i class="mdi mdi-minus"></i>Saída</button>
+                                        <button class="btn btn-outline-success" data-id="{{$p->id}}" id="entrada-{{$p->id}}" onclick="entrada(this)"><i class="mdi mdi-plus"></i>Entrada</button>
+                                        <button class="btn btn-outline-danger" data-id="{{$p->id}}" id="saida-{{$p->id}}" onclick="saida(this)"><i class="mdi mdi-minus"></i>Saída</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -54,20 +52,20 @@
         
         function entrada(element){
             var id = $(element).data('id');
-            var cliid = $(element).data('clienteid');
+            //var cliid = $(element).data('clienteid');
 
             $("#idprodentrada").val(id);
-            $("#idclientrada").val(cliid);
+            //$("#idclientrada").val(cliid);
             
             $("#novaentrada").modal('show');
         }
 
         function saida(element){
             var id = $(element).data('id');
-            var cliid = $(element).data('clienteid');
+            //var cliid = $(element).data('clienteid');
 
             $("#idprodsaida").val(id);
-            $("#idclisaida").val(cliid);
+            //$("#idclisaida").val(cliid);
 
             $("#novasaida").modal('show');
         }

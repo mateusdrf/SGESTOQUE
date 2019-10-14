@@ -13,16 +13,16 @@
                 <form method="POST" action="{{ route('cliente.entrada.nova') }}">
                     @csrf
 
-                    <input type="hidden" name="idprod" id="idprodentrada">
-                    <input type="hidden" name="idcli" id="idclientrada">
+                    <input type="hidden" name="idprodent" id="idprodentrada">
+                    <input type="hidden" name="idclient" id="idclientrada">
 
                     <div class="form-group row">
                         <label for="quantidadeent" class="col-md-4 col-form-label text-md-right">Quantidade</label>
 
                         <div class="col-md-6">
-                            <input id="quantidadeent" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
+                            <input id="quantidadeent" type="number" class="form-control @error('quantidadeent') is-invalid @enderror" name="quantidadeent" value="{{ old('quantidadeent') }}" required autocomplete="quantidadeent" autofocus>
 
-                            @error('quantidade')
+                            @error('quantidadeent')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -31,12 +31,12 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="motivo" class="col-md-4 col-form-label text-md-right">Motivo</label>
+                        <label for="motivoent" class="col-md-4 col-form-label text-md-right">Motivo</label>
 
                         <div class="col-md-6">
-                            <input id="motivoent" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
+                            <input id="motivoent" type="text" class="form-control @error('motivoent') is-invalid @enderror" name="motivoent" value="{{ old('motivoent') }}" required autocomplete="motivoent">
 
-                            @error('motivo')
+                            @error('motivoent')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
                 </div>
             </form>
         </div>
@@ -70,16 +70,16 @@
                 <form method="POST" action="{{ route('cliente.saida.nova') }}">
                     @csrf
 
-                    <input type="hidden" name="idprod" id="idprodsaida">
+                    <input type="hidden" name="idprodsai" id="idprodsaida">
                     <input type="hidden" name="idcli" id="idclisaida">
 
                     <div class="form-group row">
-                        <label for="quantidade" class="col-md-4 col-form-label text-md-right">Quantidade</label>
+                        <label for="quantidadesai" class="col-md-4 col-form-label text-md-right">Quantidade</label>
 
                         <div class="col-md-6">
-                            <input id="quantidadesai" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{ old('quantidade') }}" required autocomplete="quantidade" autofocus>
+                            <input id="quantidadesai" type="number" class="form-control @error('quantidadesai') is-invalid @enderror" name="quantidadesai" value="{{ old('quantidadesai') }}" required autocomplete="quantidadesai" autofocus>
 
-                            @error('quantidade')
+                            @error('quantidadesai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -88,12 +88,12 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="motivo" class="col-md-4 col-form-label text-md-right">Motivo</label>
+                        <label for="motivosai" class="col-md-4 col-form-label text-md-right">Motivo</label>
 
                         <div class="col-md-6">
-                            <input id="motivosai" type="text" class="form-control @error('motivo') is-invalid @enderror" name="motivo" value="{{ old('motivo') }}" required autocomplete="motivo">
+                            <input id="motivosai" type="text" class="form-control @error('motivosai') is-invalid @enderror" name="motivosai" value="{{ old('motivosai') }}" required autocomplete="motivosai">
 
-                            @error('motivo')
+                            @error('motivosai')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -102,8 +102,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
                 </div>
             </form>
         </div>

@@ -38,7 +38,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListaClientes() {
-        $clientes = \App\Cliente::where('isadmin', true)->get();
+        //$clientes = \App\Cliente::where('isadmin', true)->get();
 
         return view('admin.clientes');
     }
@@ -57,14 +57,17 @@ class HomeController extends Controller
             'password'  => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        \App\Cliente::create([
-            'firstname' => $req['firstname'],
-            'lastname'  => $req['lastname'],
-            'email'     => $req['email'],
-            'isadmin'   => true,
-            'isvalid'   => true,
-            'password'  => Hash::make($req['password']),
-        ]);
+        $cliente = new \App\Cliente();
+        $cliente->firstname  = $req['firstname'];
+        $cliente->lastname   = $req['lastname'];
+        $cliente->email      = $req['email'];
+        $cliente->isadmin    = true;
+        $cliente->isvalid    = true;
+        $cliente->password   = Hash::make($req['password']);
+        $cliente->save();
+        $cliente->cliente_id = $cliente->id;
+        $cliente->save();
+
         return view('admin.clientes');
     }
 

@@ -60,19 +60,17 @@ class HomeController extends Controller
             'password'  => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        $user = Auth::user();
+        $user = \App\Cliente::getUserLogged();
 
-        App\Cliente::create([
+        \App\Cliente::create([
             'firstname'  => $req['firstname'],
             'lastname'   => $req['lastname'],
             'email'      => $req['email'],
-            'cliente_id' => \Auth::id(),
+            'cliente_id' => $user->id,
             'isadmin'    => false,
             'isvalid'    => true,
             'password'   => Hash::make($req['password']),
         ]);
         return back()->withInput();
     }
-
-
 }

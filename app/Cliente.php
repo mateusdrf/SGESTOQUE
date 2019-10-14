@@ -5,6 +5,7 @@ namespace App;
 use App\Notifications\Cliente\Auth\ResetPassword;
 use App\Notifications\Cliente\Auth\VerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Cliente extends Authenticatable
@@ -57,5 +58,9 @@ class Cliente extends Authenticatable
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
+    }
+
+    public function scopeGetUserLogged(){
+        return Auth::guard('cliente')->user();
     }
 }

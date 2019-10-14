@@ -29,7 +29,4 @@ Route::group(['namespace' => 'Admin'], function() {
     
     Route::get('listagem', 'HomeController@ListaAdmins')->name('admins.list');
     Route::post('inseriradmin', 'HomeController@InserirAdmin')->name('admin.inserir');
-
-        
-
 });

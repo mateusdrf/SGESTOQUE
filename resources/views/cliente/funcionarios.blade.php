@@ -2,6 +2,7 @@
 @extends('cliente.layouts.app')
 
 @section('content')
+<input type="hidden" id="funcionarios" value="{{$funcionarios}}">
 <div class="row">
     <div class="col-lg-12">
         <div class="grid">
@@ -42,4 +43,33 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        function editar(element){
+            var id = $(element).data('id');
+            var produtos = JSON.parse($("#funcionarios").val());
+            var ps = produtos[produtos.findIndex(obj => obj.id==id)]; //ps = produto selecionado
+        
+            $("#enome").val(ps.nome);
+            $("#eprecocompra").val(ps.precocompra);
+            $("#eprecovenda").val(ps.precovenda);
+            $("#edatavencimento").val(ps.datavencimento);
+            $("#eqtdmin").val(ps.qtdmin);
+            $("#eqtdmax").val(ps.qtdmax);
+            $("#edescricao").val(ps.descricao);
+            
+            $("#editarproduto").modal('show');
+        }
+
+        function deletar(element){
+            var id = $(element).data('id');
+            var produtos = JSON.parse($("#produtos").val());
+            var ps = produtos[produtos.findIndex(obj => obj.id==id)];
+
+            $("#did").val(id);
+            $("#msgConfirm").html(`Deseja deletar o item <strong>` + ps.nome + `</strong>`);
+            $("#deletarproduto").modal('show');
+        }
+    </script>
 @endsection

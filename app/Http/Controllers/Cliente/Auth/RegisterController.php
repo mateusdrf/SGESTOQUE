@@ -65,14 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Cliente::create([
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'email'     => $data['email'],
-            'isadmin'   => true,
-            'isvalid'   => true,
-            'password'  => Hash::make($data['password']),
-        ]);
+        $cliente = new Cliente();
+        $cliente->firstname  = $data['firstname'];
+        $cliente->lastname   = $data['lastname'];
+        $cliente->email      = $data['email'];
+        $cliente->cliente_id = $cliente->id;
+        $cliente->isadmin    = true;
+        $cliente->isvalid    = true;
+        $cliente->password   = Hash::make($data['password']);
+        
+        $cliente->save();
+        return 0;
     }
 
     /**
