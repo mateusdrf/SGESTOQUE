@@ -52,7 +52,9 @@
 @section('scripts')
     <script>
         // $(document).ready(function(){
-        //     $("#table").DataTable();
+        //     var table = $("#table").DataTable({
+        //         "oLanguage": set_language_datatables()
+        //     });
         // });
 
         function editar(element){

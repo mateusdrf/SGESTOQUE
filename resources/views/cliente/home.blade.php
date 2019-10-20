@@ -53,6 +53,7 @@
     </div>
 </div>
 <div class="row" style="height: 250px!important">
+    <input type="hidden" id="estoquecritico" value="{{$estoquecritico}}">
     <div class="col-md-3 col-sm-12 col-12 equel-grid">
         <div class="pizza" id="pizza1"></div>
     </div>
@@ -102,10 +103,12 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            monta_pizzas("pizza1", "Produto 1");
-            monta_pizzas("pizza2", "Produto 2");
-            monta_pizzas("pizza3", "Produto 3");
-            monta_pizzas("pizza4", "Produto 4");
+            var pec = JSON.parse($("#estoquecritico").val());
+
+            pec[0] == null ? console.log("pizza1 null") : monta_pizzas("pizza1", pec[0].nome, pec[0].qtdmin, pec[0].qtdatual);
+            pec[1] == null ? console.log("pizza2 null") : monta_pizzas("pizza2", pec[1].nome, pec[1].qtdmin, pec[1].qtdatual);
+            pec[2] == null ? console.log("pizza3 null") : monta_pizzas("pizza3", pec[2].nome, pec[2].qtdmin, pec[2].qtdatual);
+            pec[3] == null ? console.log("pizza4 null") : monta_pizzas("pizza4", pec[3].nome, pec[3].qtdmin, pec[3].qtdatual);
 
             monta_semicirculo("semi1", "Produto 1");
             monta_semicirculo("semi2", "Produto 2");
@@ -115,7 +118,7 @@
             monta_barras("barras");
         });
 
-        function monta_pizzas(chart_id, prod){
+        function monta_pizzas(chart_id, prod, qtdmin, qtdatual){
             Highcharts.chart(chart_id, {
                 chart: {
                     type: 'pie'
@@ -148,15 +151,15 @@
                 series: [{
                     name: 'Produtos',
                     data: [{
-                        name: 'Entradas',
-                        y: 10,
-                        z: 2,
-                        color: '#39b02e'
-                    }, {
-                        name: 'Saídas',
-                        y: 10,
+                        name: 'Qtd Atual',
+                        y: qtdatual,
                         z: 2,
                         color: '#f40401'
+                    }, {
+                        name: 'Qtd Mínima',
+                        y: qtdmin,
+                        z: 2,
+                        color: '#39b02e'
                     }]
                 }]
             });

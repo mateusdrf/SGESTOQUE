@@ -30,7 +30,32 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('cliente.home');
+        //retornar produtos com estoque critico
+        //retornar produtos com maior movimentação
+        //retornar por mes a quantidade de entradas e saidas de produtos
+
+        $user     = Auth::guard('cliente')->user()->id;
+        $cliente  = \App\Cliente::Find($user);
+        $produtos = \App\Produto::where('cliente_id', $cliente->cliente_id)->where('isactive', '<>', 1)->get();
+
+        $estoquecritico = array();
+
+        foreach($produtos as $p){
+            $entradas = \App\Entrada::where('produto_id', $p->id)->get();
+            $saidas   = \App\Saida::where('produto_id', $p->id)->get();
+
+            $entradas = collect($entradas)->sum('quantidade');
+            $saidas   = collect($saidas)->sum('quantidade');
+
+            $p->qtdatual = $entradas - $saidas;
+
+            if($p->qtdatual <= $p->qtdmin){
+                array_push($estoquecritico, $p);
+            }
+        }
+
+
+        return view('cliente.home')->with('estoquecritico', json_encode($estoquecritico));
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------------------------------*/

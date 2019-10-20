@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Out-2019 às 08:13
+-- Tempo de geração: 20-Out-2019 às 23:57
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -112,6 +112,19 @@ CREATE TABLE `entradas` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `entradas`
+--
+
+INSERT INTO `entradas` (`id`, `cliente_id`, `produto_id`, `quantidade`, `motivo`, `created_at`, `updated_at`) VALUES
+(13, 28, 14, 100, 'Chegou', '2019-10-20 15:30:34', '2019-10-20 15:30:34'),
+(14, 28, 14, 12, 'Chegou', '2019-10-20 17:20:43', '2019-10-20 17:20:43'),
+(15, 28, 15, 12, 'Chegou', '2019-10-20 17:20:52', '2019-10-20 17:20:52'),
+(16, 28, 16, 20, 'Chegou', '2019-10-20 17:21:11', '2019-10-20 17:21:11'),
+(17, 28, 17, 14, 'Chegou', '2019-10-20 17:21:19', '2019-10-20 17:21:19'),
+(18, 28, 18, 15, 'Chegou', '2019-10-20 17:21:42', '2019-10-20 17:21:42'),
+(19, 28, 19, 10, 'Chegou', '2019-10-21 00:35:58', '2019-10-21 00:35:58');
+
 -- --------------------------------------------------------
 
 --
@@ -184,6 +197,20 @@ CREATE TABLE `produtos` (
   `isactive` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `cliente_id`, `nome`, `precocompra`, `precovenda`, `datavencimento`, `qtdmin`, `qtdmax`, `qtdatual`, `descricao`, `updated_at`, `created_at`, `isactive`) VALUES
+(14, 28, 'Vectra Tubarão1', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 102, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(15, 28, 'Vectra Tubarão2', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 12, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(16, 28, 'Vectra Tubarão3', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 20, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(17, 28, 'Vectra Tubarão4', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 14, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(18, 28, 'Vectra Tubarão5', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 15, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(19, 28, 'Vectra Tubarão6', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 10, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(20, 28, 'Vectra Tubarão7', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 0, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0),
+(21, 28, 'Vectra Tubarão8', '22.000,00', '25.000,00', '15/04/2050', 13, 15, 0, 'Carro de macho', '2019-10-21 00:38:19', '2019-10-20 15:30:14', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -199,6 +226,13 @@ CREATE TABLE `saidas` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `saidas`
+--
+
+INSERT INTO `saidas` (`id`, `cliente_id`, `produto_id`, `quantidade`, `motivo`, `created_at`, `updated_at`) VALUES
+(7, 28, 14, 10, 'Vendeu', '2019-10-20 15:30:43', '2019-10-20 15:30:43');
 
 -- --------------------------------------------------------
 
@@ -310,7 +344,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `failed_jobs`
@@ -328,13 +362,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `saidas`
 --
 ALTER TABLE `saidas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `users`
