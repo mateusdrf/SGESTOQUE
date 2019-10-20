@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Out-2019 às 05:07
+-- Tempo de geração: 20-Out-2019 às 08:13
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `isvalid`, `updated_at`, `created_at`) VALUES
-(5, 'Mateus', 'Ferreira', 'mreisf.geral@gmail.com', '$2y$10$IkF8wjiBXOR23y2FJ9agGO/LJNQgrH3gJyiTXpawA8RunrwVpetfK', 0, '2019-09-25 06:28:35', '2019-09-25 06:28:35');
+(5, 'Mateus', 'Ferreira', 'mreisf.geral@gmail.com', '$2y$10$vIESbLR7dxQO3hAIgkcT4Oe5TcEc5jsxyKbnqCLLsB1z7NFZ/413y', 1, '2019-10-20 04:25:06', '2019-09-25 06:28:35');
 
 -- --------------------------------------------------------
 
@@ -82,8 +82,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `firstname`, `lastname`, `email`, `cliente_id`, `password`, `isadmin`, `isvalid`, `updated_at`, `created_at`) VALUES
-(24, 'Mateus', 'Reis', 'm@g.com', 24, '$2y$10$joiUYIRNESTI3fUG/C5M3.SOhG6bzThz7yLWoixiHu7ClOMGWc3uC', 1, 1, '2019-10-09 04:29:02', '2019-10-09 04:29:02'),
-(25, 'Jose', 'Henrique', 'jh@g.com', 24, '$2y$10$0nFrC9989dz1BJVDgspMQOkZQ0EDeRAz6l2/uqlQqMkZC52E4rdHm', 0, 1, '2019-10-09 04:34:16', '2019-10-09 04:34:16');
+(28, 'Mateus', 'Reis', 'm@g.com', 28, '$2y$10$xkhRlyaNH3ASvSNhPxsXCOIjqhbNCF.swZ6cV0T10hbXo45EnHmBK', 1, 1, '2019-10-19 17:37:44', '2019-10-15 02:33:47');
 
 -- --------------------------------------------------------
 
@@ -184,15 +183,6 @@ CREATE TABLE `produtos` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `isactive` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `produtos`
---
-
-INSERT INTO `produtos` (`id`, `cliente_id`, `nome`, `precocompra`, `precovenda`, `datavencimento`, `qtdmin`, `qtdmax`, `qtdatual`, `descricao`, `updated_at`, `created_at`, `isactive`) VALUES
-(10, 24, 'Vectra Tubarão', '22.000,00', '25.000,00', '15/04/2050', 10, 25, NULL, 'Carro de macho', '2019-10-14 04:52:35', '2019-10-09 04:39:36', 0),
-(11, 24, 'Gol', '10.000,00', '15.000,00', '16/05/2022', 115, 120, NULL, 'Branco', '2019-10-14 04:53:03', '2019-10-13 20:06:58', 1),
-(12, 24, 'Gol', '10.000,00', '12.000,00', '15/04/2021', 12, 100, NULL, 'Todos pretos', '2019-10-14 04:53:34', '2019-10-14 04:53:34', 0);
 
 -- --------------------------------------------------------
 
@@ -308,19 +298,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `failed_jobs`
@@ -338,13 +328,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `saidas`
 --
 ALTER TABLE `saidas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `users`
