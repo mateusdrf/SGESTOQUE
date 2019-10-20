@@ -38,12 +38,12 @@ class HomeController extends Controller
     /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 
     /**
-     * Show Funcionarios
+     * Lista Funcionarios
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListarFuncionarios() {
-        $funcionarios = \App\Cliente::where('isadmin', 0)->get();
+        $funcionarios = \App\Cliente::where('isadmin', 0)->where('isvalid', 1)->get();
         return view('cliente.funcionarios')->with('funcionarios', $funcionarios);
     }
 
@@ -60,17 +60,65 @@ class HomeController extends Controller
             'password'  => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        $user = \App\Cliente::getUserLogged();
+        $user = Auth::guard('cliente')->user()->id;
 
         \App\Cliente::create([
             'firstname'  => $req['firstname'],
             'lastname'   => $req['lastname'],
             'email'      => $req['email'],
-            'cliente_id' => $user->id,
+            'cliente_id' => $user,
             'isadmin'    => false,
             'isvalid'    => true,
             'password'   => Hash::make($req['password']),
         ]);
+        return back()->withInput();
+    }
+
+
+    /**
+     * Edita funcionário
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function EditarFuncionario(Request $req) {
+        $funcionario = \App\Cliente::Find($req['id']);
+
+        $validatedData = $req->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname'  => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255'],
+            'password'  => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        if($req['email'] == $funcionario->email){
+            $funcionario->email = $req['email'];
+        } else{
+            $validateEmail = \App\Cliente::where('email', $req['email'])->count();
+            if($validateEmail > 0){
+                return back()->withInput();
+            }else{
+                $funcionario->email = $req['email'];
+            }
+        }
+        
+        $funcionario->firstname = $req['firstname'];
+        $funcionario->lastname  = $req['lastname'];
+        $funcionario->password  = Hash::make($req['password']);
+        $funcionario->save();
+
+        return back()->withInput();
+    }
+
+     /**
+     * Deleta funcionario
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function DeletarFuncionario(Request $req) {
+        $funcionario = \App\Cliente::Find($req['id']);
+        $funcionario->isvalid = false;
+        $funcionario->save();
+
         return back()->withInput();
     }
 }

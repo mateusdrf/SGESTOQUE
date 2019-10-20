@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ProdutoController extends Controller
 {
+    protected $redirectTo = '/cliente/login';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('cliente.auth:cliente');
+    }
+
     /**
      * Show Produtos
      *
@@ -46,7 +58,7 @@ class ProdutoController extends Controller
             'qtdmax'         => $req['qtdmax'],
             'descricao'      => $req['descricao'],
         ]);
-        return back()->withInput();
+        return back();
     }
 
     /**
@@ -74,7 +86,7 @@ class ProdutoController extends Controller
 
         $produto->save();
 
-        return back()->withInput();
+        return back();
     }
 
     /**
@@ -83,11 +95,17 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function DeletarProduto(Request $req) {
-        $produto = \App\Produto::Find($req['id']);
-        $produto->isactive = 1;
-        $produto->save();
-
-        return back()->withInput();
+        $entrada = \App\Entrada::where('produto_id', $req['id'])->get();
+        $saida   = \App\Saida::where('produto_id', $req['id'])->get();
+        //if(($entrada->count() == 0 && $saida->count() == 0) || $entrada->quantidade - $saida->quantidade == 0){
+            $produto = \App\Produto::Find($req['id']);
+            $produto->isactive = false;
+            $produto->save();
+        //}else{
+            //Aqui retorna uma mensagem de erro falando que não pode excluir produto que tem em estoque
+            //return back()->withInput();
+        //}
+        return back();
     }
 
 
@@ -113,7 +131,7 @@ class ProdutoController extends Controller
             'quantidade'     => $req['quantidadeent'],
         ]);
 
-        return back()->withInput();
+        return back();
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -138,7 +156,7 @@ class ProdutoController extends Controller
             'quantidade'     => $req['quantidadesai'],
         ]);
 
-        return back()->withInput();
+        return back();
     }
 
     

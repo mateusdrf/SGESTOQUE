@@ -5,7 +5,10 @@ Route::group(['namespace' => 'Cliente'], function() {
     Route::get('/', 'HomeController@index')->name('cliente.dashboard');
 
     // Login
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('cliente.login');
+    Route::get('login', function () {
+        return view('cliente.auth.login');
+    })->name('cliente.login');
+
     Route::post('login', 'Auth\LoginController@login');
     Route::post('logout', 'Auth\LoginController@logout')->name('cliente.logout');
 
@@ -44,4 +47,6 @@ Route::group(['namespace' => 'Cliente'], function() {
     //Rota para os funcionários
     Route::get('funcionarios', 'HomeController@ListarFuncionarios')->name('cliente.funcionarios');
     Route::post('funcionario/novo', 'HomeController@NovoFuncionario')->name('cliente.inserir.funcionario');
+    Route::post('funcionario/editar', 'HomeController@EditarFuncionario')->name('cliente.funcionario.editar');
+    Route::post('funcionario/deletar', 'HomeController@DeletarFuncionario')->name('cliente.funcionario.deletar');
 });

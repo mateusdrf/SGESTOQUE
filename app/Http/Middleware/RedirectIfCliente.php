@@ -21,7 +21,7 @@ class RedirectIfCliente
             return redirect()->route('cliente.dashboard');
         }
 
-        return $next($request);
+        return $next($request); 
     }
 
 }

@@ -1,17 +1,17 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!-- Modal de inserir funcionarios -->
+<!-- Modal de inserir clientes -->
 
-<div class="modal" id="novofuncionario" tabindex="-1" role="dialog">
+<div class="modal" id="novoadmin" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Novo Cliente</h5>
+                <h5 class="modal-title">Novo Administrador</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('cliente.inserir.funcionario') }}">
+                <form method="POST" action="{{ route('admin.inserir') }}">
                     @csrf
 
                     <div class="form-group row">
@@ -88,18 +88,18 @@
 </div>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!-- Modal de editar funcionario -->
-<div class="modal" id="editarfuncionario" tabindex="-1" role="dialog">
+<!-- Modal de editar admin -->
+<div class="modal" id="editaradmin" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Funcionario</h5>
+                <h5 class="modal-title">Editar Administrador</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('cliente.funcionario.editar') }}">
+                <form method="POST" action="{{ route('admin.editar') }}">
                     @csrf
                     <input type="hidden" name="id" id="eid">
                     <div class="form-group row">
@@ -175,21 +175,21 @@
 </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!-- Modal de editar produto -->
-<div class="modal" id="deletarfuncionario" tabindex="-1" role="dialog">
+<!-- Modal de editar administrador -->
+<div class="modal" id="deletaradmin" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Deletar Funcionario</h5>
+                <h5 class="modal-title">Deletar Administrador</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('cliente.funcionario.deletar') }}">
+                <form method="POST" action="{{ route('admin.deletar') }}">
                     @csrf
                     <input type="hidden" name="id" id="did">
-                    <p id="msgConfirm">Deseja deletar este funcionario?</p>
+                    <p id="msgConfirm">Deseja deletar este administrador?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-check"></i>Confirmar</button>

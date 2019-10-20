@@ -26,7 +26,11 @@ Route::group(['namespace' => 'Admin'], function() {
     
     Route::get('clientes/listagem', 'HomeController@ListaClientes')->name('admin.clientes.list');
     Route::post('inserircliente', 'HomeController@InserirCliente')->name('admin.clientes.inserir');
+    Route::post('editarcliente', 'HomeController@EditarCliente')->name('admin.clientes.editar');
+    Route::post('deletarcliente', 'HomeController@DeletarCliente')->name('admin.clientes.deletar');
     
     Route::get('listagem', 'HomeController@ListaAdmins')->name('admins.list');
     Route::post('inseriradmin', 'HomeController@InserirAdmin')->name('admin.inserir');
+    Route::post('editaradmin', 'HomeController@EditarAdmin')->name('admin.editar');
+    Route::post('deletaradmin', 'HomeController@DeletarAdmin')->name('admin.deletar');
 });

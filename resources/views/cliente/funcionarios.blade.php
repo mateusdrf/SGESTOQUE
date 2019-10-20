@@ -48,28 +48,25 @@
     <script>
         function editar(element){
             var id = $(element).data('id');
-            var produtos = JSON.parse($("#funcionarios").val());
-            var ps = produtos[produtos.findIndex(obj => obj.id==id)]; //ps = produto selecionado
+            var funcionarios = JSON.parse($("#funcionarios").val());
+            var fs = funcionarios[funcionarios.findIndex(obj => obj.id==id)]; //fs = funcionario selecionado
         
-            $("#enome").val(ps.nome);
-            $("#eprecocompra").val(ps.precocompra);
-            $("#eprecovenda").val(ps.precovenda);
-            $("#edatavencimento").val(ps.datavencimento);
-            $("#eqtdmin").val(ps.qtdmin);
-            $("#eqtdmax").val(ps.qtdmax);
-            $("#edescricao").val(ps.descricao);
+            $("#eid").val(fs.id);
+            $("#efirstname").val(fs.firstname);
+            $("#elastname").val(fs.lastname);
+            $("#eemail").val(fs.email);
             
-            $("#editarproduto").modal('show');
+            $("#editarfuncionario").modal('show');
         }
 
         function deletar(element){
             var id = $(element).data('id');
-            var produtos = JSON.parse($("#produtos").val());
-            var ps = produtos[produtos.findIndex(obj => obj.id==id)];
+            var funcionario = JSON.parse($("#funcionarios").val());
+            var fs = funcionario[funcionario.findIndex(obj => obj.id==id)];
 
             $("#did").val(id);
-            $("#msgConfirm").html(`Deseja deletar o item <strong>` + ps.nome + `</strong>`);
-            $("#deletarproduto").modal('show');
+            $("#msgConfirm").html(`Deseja deletar o o funcionário <strong>` + fs.firstname + ` ` + fs.lastname + `</strong>`);
+            $("#deletarfuncionario").modal('show');
         }
     </script>
 @endsection

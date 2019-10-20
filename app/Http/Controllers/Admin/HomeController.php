@@ -38,13 +38,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListaClientes() {
-        //$clientes = \App\Cliente::where('isadmin', true)->get();
+        $clientes = \App\Cliente::where('isadmin', true)->where('isvalid', true)->get();
 
-        return view('admin.clientes');
+        return view('admin.clientes')->with('clientes', $clientes);
     }
 
     /**
-     * Show the Admin dashboard.
+     * insere novo cliente.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -65,10 +65,58 @@ class HomeController extends Controller
         $cliente->isvalid    = true;
         $cliente->password   = Hash::make($req['password']);
         $cliente->save();
-        $cliente->cliente_id = $cliente->id;
+
+        return back();
+    }
+
+    /**
+     * Edita funcionário
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function EditarCliente(Request $req) {
+        $cliente = \App\Cliente::Find($req['id']);
+
+        $validatedData = $req->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname'  => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255'],
+            'password'  => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        if($req['email'] == $cliente->email){
+            $cliente->email = $req['email'];
+        } else{
+            $validateEmail = \App\Cliente::where('email', $req['email'])->count();
+            if($validateEmail > 0){
+                return back()->withInput();
+            }else{
+                $cliente->email = $req['email'];
+            }
+        }
+        
+        $cliente->firstname = $req['firstname'];
+        $cliente->lastname  = $req['lastname'];
+        $cliente->password  = Hash::make($req['password']);
         $cliente->save();
 
-        return view('admin.clientes');
+        return back();
+    }
+
+    /**
+     * Deleta funcionario
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function DeletarCliente(Request $req) {
+
+        //$validateProdutos = \App\Produto::where('', $req['id'])->count();
+
+        $cliente = \App\Cliente::Find($req['id']);
+        $cliente->isvalid = false;
+        $cliente->save();
+
+        return back();
     }
 
     /**
@@ -77,13 +125,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function ListaAdmins() {
-        $admins = \App\Admin::all();
+        $admins = \App\Admin::where('isvalid', 1)->get();
 
-        return view('admin.admins');
+        return view('admin.admins')->with('admins', $admins);
     }
 
     /**
-     * Show the Admin dashboard.
+     * Admin insert user.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -92,17 +140,67 @@ class HomeController extends Controller
         $validatedData = $req->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname'  => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:clientes'],
             'password'  => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
+        $user = Auth::guard('admin')->user()->id;
+
         \App\Admin::create([
-            'firstname' => $req['firstname'],
-            'lastname'  => $req['lastname'],
-            'email'     => $req['email'],
-            'isvalid'   => true,
-            'password'  => Hash::make($req['password']),
+            'firstname'  => $req['firstname'],
+            'lastname'   => $req['lastname'],
+            'email'      => $req['email'],
+            'isvalid'    => true,
+            'password'   => Hash::make($req['password']),
         ]);
-        return view('admin.admins');
+        return back();
     }
+
+    /**
+     * Edita admin
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function EditarAdmin(Request $req) {
+        $admin = \App\Admin::Find($req['id']);
+
+        $validatedData = $req->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname'  => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255'],
+            'password'  => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        if($req['email'] == $admin->email){
+            $admin->email = $req['email'];
+        } else{
+            $validateEmail = \App\Admin::where('email', $req['email'])->count();
+            if($validateEmail > 0){
+                return back();
+            }else{
+                $admin->email = $req['email'];
+            }
+        }
+        
+        $admin->firstname = $req['firstname'];
+        $admin->lastname  = $req['lastname'];
+        $admin->password  = Hash::make($req['password']);
+        $admin->save();
+
+        return back();
+    }
+
+     /**
+     * Deleta admin
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function DeletarAdmin(Request $req) {
+        $admin = \App\Admin::Find($req['id']);
+        $admin->isvalid = false;
+        $admin->save();
+
+        return back();
+    }
+
 }

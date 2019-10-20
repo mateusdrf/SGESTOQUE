@@ -71,7 +71,7 @@ class RegisterController extends Controller
         $cliente->email      = $data['email'];
         $cliente->cliente_id = $cliente->id;
         $cliente->isadmin    = true;
-        $cliente->isvalid    = true;
+        $cliente->isactive   = true;
         $cliente->password   = Hash::make($data['password']);
         
         $cliente->save();
