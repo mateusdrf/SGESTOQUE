@@ -1,6 +1,6 @@
 @extends('cliente.modals.estoque.modals')
 @extends('cliente.layouts.app')
-
+@section('title', 'Estoque')
 @section('content')
 <input type="hidden" value="{{$produtos}}">
 <div class="container-fluid">

@@ -1,6 +1,6 @@
 @extends('admin.modals.admin.modals')
 @extends('admin.layouts.app')
-
+@section('title', 'Administradores')
 @section('content')
 <input type="hidden" id="admins" value="{{$admins}}">
 <div class="row">
