@@ -137,6 +137,7 @@
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/highcharts.js') }}"></script>
     <!-- endbuild -->
   </body>
   @yield('scripts')

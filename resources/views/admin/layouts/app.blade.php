@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <script src="{{ asset('js/highcharts.js') }}"></script>
     
     <style>
       .t-header .t-header-content-wrapper{
