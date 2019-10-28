@@ -52,38 +52,21 @@
         <p class="text-gray">Produtos com estoque crítico</p>
     </div>
 </div>
-<div class="row" style="height: 250px!important">
+<div class="row" style="">
     <input type="hidden" id="estoquecritico" value="{{$estoquecritico}}">
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
+    <input type="hidden" id="saidas" value="{{$saidas}}">
+    <input type="hidden" id="entradas" value="{{$entradas}}">
+    <div class="col-md-3 col-sm-12 col-12">
         <div class="pizza" id="pizza1"></div>
     </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
+    <div class="col-md-3 col-sm-12 col-12">
         <div class="pizza" id="pizza2"></div>
     </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
+    <div class="col-md-3 col-sm-12 col-12">
         <div class="pizza" id="pizza3"></div>
     </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
+    <div class="col-md-3 col-sm-12 col-12">
         <div class="pizza" id="pizza4"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <p class="text-gray" style="margin-top: 25px!important;">Produtos com maior movimentação</p>
-    </div>
-</div>
-<div class="row" style="height: 250px!important">
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
-        <div class="semi" id="semi1"></div>
-    </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
-        <div class="semi" id="semi2"></div>
-    </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
-        <div class="semi" id="semi3"></div>
-    </div>
-    <div class="col-md-3 col-sm-12 col-12 equel-grid">
-        <div class="semi" id="semi4"></div>
     </div>
 </div>
 
@@ -103,19 +86,43 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            var pec = JSON.parse($("#estoquecritico").val());
+            var pec = JSON.parse($("#estoquecritico").val()); //(pec)Produtos com estoque critico
+            var pmme = JSON.parse($("#entradas").val()); //(pmm)Produtos com maiores movimentacoes 
+            var pmms = JSON.parse($("#saidas").val()); //(pmm)Produtos com maiores movimentacoes 
 
             pec[0] == null ? console.log("pizza1 null") : monta_pizzas("pizza1", pec[0].nome, pec[0].qtdmin, pec[0].qtdatual);
             pec[1] == null ? console.log("pizza2 null") : monta_pizzas("pizza2", pec[1].nome, pec[1].qtdmin, pec[1].qtdatual);
             pec[2] == null ? console.log("pizza3 null") : monta_pizzas("pizza3", pec[2].nome, pec[2].qtdmin, pec[2].qtdatual);
             pec[3] == null ? console.log("pizza4 null") : monta_pizzas("pizza4", pec[3].nome, pec[3].qtdmin, pec[3].qtdatual);
 
-            monta_semicirculo("semi1", "Produto 1");
-            monta_semicirculo("semi2", "Produto 2");
-            monta_semicirculo("semi3", "Produto 3");
-            monta_semicirculo("semi4", "Produto 4");
+            var arraydataentradas = [];
+            var arraydatasaidas   = [];
 
-            monta_barras("barras");
+            for(var i = 1 ; i <= 12 ; i++){
+                var flage = false;
+                var flags = false;
+
+                $.map(pmme, function(obj, idx){
+                    if(obj["mes"] == i){
+                        arraydataentradas.push(obj["data"]);
+                        flage = true;
+                    }
+                });
+                if(flage == false){
+                    arraydataentradas.push(0);
+                }
+
+                $.map(pmms, function(obj, idx){
+                    if(obj["mes"] == i){
+                        arraydatasaidas.push(obj["data"]);
+                        flags = true;
+                    }
+                });
+                if(flags == false){
+                    arraydatasaidas.push(0);
+                }
+            }
+            monta_barras("barras", arraydataentradas, arraydatasaidas);
         });
 
         function monta_pizzas(chart_id, prod, qtdmin, qtdatual){
@@ -165,48 +172,7 @@
             });
         }
 
-        function monta_semicirculo(chart_id, prod){
-            Highcharts.chart(chart_id, {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: 0,
-                    plotShadow: false
-                },
-                credits:{
-                    enabled: false
-                },
-                title: {
-                    text: prod,
-                    align: 'center',
-                    verticalAlign: 'top',
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        dataLabels: {
-                            enabled: false
-                        },
-                        startAngle: -90,
-                        endAngle: 90,
-                        center: ['50%', '75%'],
-                        size: '100%'
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    name: prod,
-                    innerSize: '50%',
-                    data: [
-                        ['Quantidade Minima', 50],
-                        ['Quantidade Atual', 50]
-                    ]
-                }]
-            });
-        }
-
-        function monta_barras(chart_id){
+        function monta_barras(chart_id, entradas, saidas){
             Highcharts.chart(chart_id, {
                 chart: {
                     type: 'column'
@@ -259,14 +225,19 @@
                 },
                 series: [{
                     name: 'Entradas',
-                    data: [49, 71, 106, 129, 144, 176, 135, 148, 216, 194, 95, 54]
+                    data: entradas
 
                 }, {
                     name: 'Saídas',
-                    data: [83, 78, 98, 93, 106, 84, 105, 104, 91, 83, 106, 92]
+                    data: saidas
 
                 }]
             });
+        }
+
+        function GetMonthName(monthNumber) {
+            var months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            return months[monthNumber - 1];
         }
     </script>
 @endsection

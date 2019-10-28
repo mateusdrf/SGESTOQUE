@@ -39,23 +39,29 @@ class HomeController extends Controller
         $produtos = \App\Produto::where('cliente_id', $cliente->cliente_id)->where('isactive', '<>', 1)->get();
 
         $estoquecritico = array();
+        $maioresmovimentacoes = array();
 
         foreach($produtos as $p){
             $entradas = \App\Entrada::where('produto_id', $p->id)->get();
             $saidas   = \App\Saida::where('produto_id', $p->id)->get();
 
-            $entradas = collect($entradas)->sum('quantidade');
-            $saidas   = collect($saidas)->sum('quantidade');
+            $entradasQtd = collect($entradas)->sum('quantidade');
+            $saidasQtd   = collect($saidas)->sum('quantidade');
 
-            $p->qtdatual = $entradas - $saidas;
+            $p->qtdatual = $entradasQtd - $saidasQtd;
 
             if($p->qtdatual <= $p->qtdmin){
                 array_push($estoquecritico, $p);
             }
         }
 
+        $entradas = \App\Entrada::where('cliente_id', $cliente->cliente_id)->select(\DB::raw('count(id) as `data`'), \DB::raw('MONTH(created_at) mes'))->groupby('mes')->get();
+        $saidas   = \App\Saida::where('cliente_id', $cliente->cliente_id)->select(\DB::raw('count(id) as `data`'), \DB::raw('MONTH(created_at) mes'))->groupby('mes')->get();
 
-        return view('cliente.home')->with('estoquecritico', json_encode($estoquecritico));
+        return view('cliente.home')
+            ->with('estoquecritico', json_encode($estoquecritico))
+            ->with('entradas', json_encode($entradas))
+            ->with('saidas', json_encode($saidas));
     }
 
     /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
