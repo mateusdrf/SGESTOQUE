@@ -30,10 +30,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        //retornar produtos com estoque critico
-        //retornar produtos com maior movimentação
-        //retornar por mes a quantidade de entradas e saidas de produtos
-
         $user     = Auth::guard('cliente')->user()->id;
         $cliente  = \App\Cliente::Find($user);
         $produtos = \App\Produto::where('cliente_id', $cliente->cliente_id)->where('isactive', '<>', 1)->get();

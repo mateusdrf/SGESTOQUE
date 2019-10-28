@@ -29,7 +29,23 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
+
+        // $produtos = \App\Produto::where('isactive', '<>', 1)->get();
+
+        // foreach($produtos as $p){
+        //     $entradas = \App\Entrada::where('produto_id', $p->id)->get();
+        //     $saidas   = \App\Saida::where('produto_id', $p->id)->get();
+
+        //     $entradas = collect($entradas)->sum('quantidade');
+        //     $saidas   = collect($saidas)->sum('quantidade');
+
+        //     $p->qtdatual = $entradas - $saidas;
+        // }
+
+        // $produtos = collect($produtos)->sortBy('qtdatual')->take(10);
+
         return view('admin.home');
+            // ->with('produtos', $produtos);
     }
 
     /**
