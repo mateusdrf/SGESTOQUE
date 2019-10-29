@@ -30,22 +30,20 @@ class HomeController extends Controller
      */
     public function index() {
 
-        // $produtos = \App\Produto::where('isactive', '<>', 1)->get();
+        $produtos = \App\Produto::select(
+                                \DB::raw('count(id) as `qtd`'),
+                                \DB::raw('cliente_id as `cliente`')
+                            )
+                            ->groupby('cliente')
+                            ->orderByDesc('qtd')
+                            ->get();
 
-        // foreach($produtos as $p){
-        //     $entradas = \App\Entrada::where('produto_id', $p->id)->get();
-        //     $saidas   = \App\Saida::where('produto_id', $p->id)->get();
+        foreach ($produtos as $item) {
+            $cliente = \App\Cliente::find($item->cliente);
+            $item->cliente = $cliente["firstname"] . " " . $cliente["lastname"];
+        }
 
-        //     $entradas = collect($entradas)->sum('quantidade');
-        //     $saidas   = collect($saidas)->sum('quantidade');
-
-        //     $p->qtdatual = $entradas - $saidas;
-        // }
-
-        // $produtos = collect($produtos)->sortBy('qtdatual')->take(10);
-
-        return view('admin.home');
-            // ->with('produtos', $produtos);
+        return view('admin.home')->with('produtos', json_encode($produtos));
     }
 
     /**

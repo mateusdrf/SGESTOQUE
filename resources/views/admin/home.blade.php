@@ -49,11 +49,12 @@
 
 <div class="row">
     <div class="col-12">
-        <p class="text-gray" style="margin-top: 25px!important;">Visualização mensal da movimentação de estoque.</p>
+        <p class="text-gray" style="margin-top: 25px!important;">Quantidade de produtos cadastrados no sistema por cliente.</p>
     </div>
 </div>
 <div class="row" style="height: 500px!important">
     <div class="col-md-12 col-sm-12 col-12 equel-grid">
+        <input type="hidden" id="produtos" value="{{$produtos}}">
         <div id="barras" style="min-width: 100%; height: 500px; margin: 0 auto"></div>
     </div>
 </div>
@@ -62,10 +63,11 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            monta_barras("barras");
+            var produtos = JSON.parse($("#produtos").val());
+            monta_barras("barras", produtos);
         });
 
-        function monta_barras(chart_id){
+        function monta_barras(chart_id, data){
             Highcharts.chart(chart_id, {
                 chart: {
                     type: 'column'
@@ -80,20 +82,7 @@
                     text: ''
                 },
                 xAxis: {
-                    categories: [
-                        'Jan',
-                        'Fev',
-                        'Mar',
-                        'Abr',
-                        'Mai',
-                        'Jun',
-                        'Jul',
-                        'Ago',
-                        'Set',
-                        'Out',
-                        'Nov',
-                        'Dez'
-                    ],
+                    categories: $.map(data, function(n){ return n.cliente }),
                     crosshair: true
                 },
                 yAxis: {
@@ -117,8 +106,8 @@
                     }
                 },
                 series: [{
-                    name: 'Clientes',
-                    data: [49, 71, 106, 129, 144, 176, 135, 148, 216, 194, 95, 54]
+                    name: 'Produtos Cadastrados',
+                    data: $.map(data, function(n){ return n.qtd }),
                 }]
             });
         }

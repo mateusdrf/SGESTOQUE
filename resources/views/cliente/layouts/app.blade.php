@@ -26,13 +26,30 @@
         background-color: white;
         border-bottom: 1px solid #f2f4f9;
       }
+
+      @media (max-width : 420px) {
+        .t-header-content-wrapper{
+          padding-left: 0px; height: 85px!important;
+        }
+        .desktop{
+          display: none!important;
+        }
+      }
+      @media (min-width : 421px) {
+        .t-header-content-wrapper{
+          padding-left: 70px; height: 85px!important;
+        }
+        .desktop{
+          padding-left: 70px!important;
+        }
+      }
     </style>
   </head>
   <body class="header-fixed">
     <nav class="t-header">
-      <div class="t-header-brand-wrapper" style="padding-left: 75px;!important">
+      <div class="t-header-brand-wrapper desktop">
         <a href="#">
-          <img class="logo" src="{{ asset('img/img.png') }}" alt="">
+          <img class="logo" style="width: 100px!important" src="{{ asset('img/img.png') }}" alt="">
         </a>
       </div>
       <div class="t-header-content-wrapper">
@@ -97,7 +114,7 @@
       <!-- partial -->
       <div class="page-content-wrapper">
         <div class="page-content-wrapper-inner">
-          <div class="content-viewport">
+          <div class="content-viewport" style="padding-top: 10px!important;">
             @yield('content')
           </div>
         </div>
