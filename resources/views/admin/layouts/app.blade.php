@@ -86,8 +86,8 @@
       <!-- partial:../../partials/_sidebar.html -->
       <div class="sidebar">
         <div class="user-profile">
-          <div class="display-avatar animated-avatar">
-            <img class="profile-img img-lg rounded-circle" src="{{ asset('assets/images/profile/male/image_1.png') }}" alt="profile image">
+          <div class="display-avatar">
+            <img class="profile-img img-lg rounded-circle" src="{{ asset('assets/images/profile/male/default.png') }}" alt="profile image">
           </div>
           <div class="info-wrapper">
             <p class="user-name">{{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}</p>
