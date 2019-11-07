@@ -12,6 +12,15 @@
                     <button class="btn btn-outline-success" data-toggle="modal" data-target="#novoproduto"><i class="mdi mdi-plus"></i>Novo Produto</button>
                 <!--/div-->
             </div>
+            @if(Session::get('erroExcluir') != null && Session::get('erroExcluir') != "")
+                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    {{Session::get('erroExcluir')}}
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="item-wrapper">
                 <div class="table-responsive">
                     <table id="table" class="table info-table">

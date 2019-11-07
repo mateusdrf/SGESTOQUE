@@ -55,6 +55,7 @@ class ProdutoController extends Controller
             'precovenda'     => $req['precovenda'],
             'datavencimento' => $req['datavencimento'],
             'qtdmin'         => $req['qtdmin'],
+            'isactive'       => 0,//0 == true
             'qtdmax'         => $req['qtdmax'],
             'descricao'      => $req['descricao'],
         ]);
@@ -95,16 +96,22 @@ class ProdutoController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function DeletarProduto(Request $req) {
-        $entrada = \App\Entrada::where('produto_id', $req['id'])->get();
-        $saida   = \App\Saida::where('produto_id', $req['id'])->get();
-        //if(($entrada->count() == 0 && $saida->count() == 0) || $entrada->quantidade - $saida->quantidade == 0){
+        $entradas = \App\Entrada::where('produto_id', $req['id'])->get();
+        $saidas   = \App\Saida::where('produto_id', $req['id'])->get();
+        
+        $valEntradas = collect($entradas)->sum('quantidade');
+        $valSaidas   = collect($saidas)->sum('quantidade');
+
+        if(($entradas->count() == 0 && $saidas->count() == 0) || $valEntradas - $valSaidas == 0){
             $produto = \App\Produto::Find($req['id']);
-            $produto->isactive = false;
+            $produto->isactive = 1;//1 == false
             $produto->save();
-        //}else{
+            dd("ok");
+        }else{
             //Aqui retorna uma mensagem de erro falando que não pode excluir produto que tem em estoque
-            //return back()->withInput();
-        //}
+            $erro = 'Não é possível excluir um produto que possui estoque.';
+            return redirect()->back()->with('erroExcluir', $erro);
+        }
         return back();
     }
 
