@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-check"></i>Confirmar</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="mdi mdi-close"></i>Cancelar</button>
                 </div>
             </form>
         </div>
@@ -102,8 +102,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="mdi mdi-check"></i>Confirmar</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="mdi mdi-close"></i>Cancelar</button>
                 </div>
             </form>
         </div>

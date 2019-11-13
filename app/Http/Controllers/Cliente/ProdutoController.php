@@ -106,11 +106,12 @@ class ProdutoController extends Controller
             $produto = \App\Produto::Find($req['id']);
             $produto->isactive = 1;//1 == false
             $produto->save();
-            dd("ok");
+            $erro = 'Produto excluído com sucesso.';
+            return redirect()->back()->with('erroExcluir', $erro)->with('class', 'success');
         }else{
             //Aqui retorna uma mensagem de erro falando que não pode excluir produto que tem em estoque
             $erro = 'Não é possível excluir um produto que possui estoque.';
-            return redirect()->back()->with('erroExcluir', $erro);
+            return redirect()->back()->with('erroExcluir', $erro)->with('class', 'danger');
         }
         return back();
     }
