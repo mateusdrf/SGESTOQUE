@@ -11,6 +11,7 @@
                     <h2>Produtos</h2>
                     <button class="btn btn-outline-success" data-toggle="modal" data-target="#novoproduto"><i class="mdi mdi-plus"></i>Novo Produto</button>
                 <!--/div-->
+                    <a href="{{ route('relatorio.produtos.excel') }}"><button class="btn btn-outline-primary"><i class="mdi mdi-file-excel"></i>Relatório</button></a>
             </div>
             @if(Session::get('erroExcluir') != null && Session::get('erroExcluir') != "")
                 <div class='alert alert-{{Session::get("class")}} alert-dismissible fade show' role='alert'>

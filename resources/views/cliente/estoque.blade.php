@@ -9,6 +9,7 @@
             <div class="grid-header">
                 <!--div style="width: 10%"-->
                     <h2>Estoque</h2>
+                    <a href="{{ route('relatorio.estoque.excel') }}"><button class="btn btn-outline-primary"><i class="mdi mdi-file-excel"></i>Relatório</button></a>
                 <!--/div-->
             </div>
             <div class="item-wrapper">

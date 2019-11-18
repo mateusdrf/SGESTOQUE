@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
+use App\Exports\ProdutoFromView;
+use App\Exports\EstoqueFromView;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ProdutoController extends Controller
 {
     protected $redirectTo = '/cliente/login';
@@ -193,5 +197,28 @@ class ProdutoController extends Controller
         }
 
         return view('cliente.estoque')->with('produtos', $produtos);
+    }
+
+
+    /*-----------------------------------------------------------------*/
+    /*-----------------------Relatorio Produtos------------------------*/
+    /*-----------------------------------------------------------------*/
+
+    /**
+     * Relatorio de Todos os produtos
+     **/
+    public function RelatorioProdutosExcel() {
+        return Excel::download(new ProdutoFromView, 'relatorio_todos_produtos.xlsx');
+    }
+
+    /*-----------------------------------------------------------------*/
+    /*-----------------------Relatorio Produtos------------------------*/
+    /*-----------------------------------------------------------------*/
+
+    /**
+     * Relatorio de Todos os produtos
+     **/
+    public function RelatorioEstoqueExcel() {
+        return Excel::download(new EstoqueFromView, 'relatorio_estoque.xlsx');
     }
 }

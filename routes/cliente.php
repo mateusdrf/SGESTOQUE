@@ -49,4 +49,7 @@ Route::group(['namespace' => 'Cliente'], function() {
     Route::post('funcionario/novo', 'HomeController@NovoFuncionario')->name('cliente.inserir.funcionario');
     Route::post('funcionario/editar', 'HomeController@EditarFuncionario')->name('cliente.funcionario.editar');
     Route::post('funcionario/deletar', 'HomeController@DeletarFuncionario')->name('cliente.funcionario.deletar');
+   
+    Route::get('relatorios/produtos', 'ProdutoController@RelatorioProdutosExcel')->name('relatorio.produtos.excel');
+    Route::get('relatorios/estoque', 'ProdutoController@RelatorioEstoqueExcel')->name('relatorio.estoque.excel');
 });
